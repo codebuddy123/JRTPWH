@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-body bg-info text-white text-center">
+				<h3>WELCOME TO PART EDIT PAGE !!</h3>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/part/update}" method="POST" th:object="${part}">
+				    
+				    <!-- First Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>ID</label>
+						</div>
+						<div class="col-4">
+							<input type="text" class="form-control"  readOnly th:field="*{id}" id="partCode" />
+						</div>
+						<div class="col-5">
+							<span id="idError"></span>
+						</div>
+					</div>
+
+					<!-- Second Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Part Code</label>
+						</div>
+						<div class="col-4">
+							<input type="text" class="form-control" th:field="*{partCode}" id="partCode" />
+						</div>
+						<div class="col-5">
+							<span id="partCodeError"></span>
+						</div>
+					</div>
+
+					<!-- Third Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Part Width</label>
+						</div>
+						<div class="col-4">
+							<input type="text" class="form-control" th:field="*{partWidth}" id="partWidth" />
+						</div>
+						<div class="col-5">
+							<span id="partWidthError"></span>
+						</div>
+					</div>
+
+					<!-- Fourth Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Part Length</label>
+						</div>
+						<div class="col-4">
+							<input type="text" class="form-control" th:field="*{partlen}" id="partlen" />
+						</div>
+						<div class="col-5">
+							<span id="partlenError"></span>
+						</div>
+					</div>
+
+					<!-- Fifth Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Part Height</label>
+						</div>
+						<div class="col-4">
+							<input type="text" class="form-control" th:field="*{partHeight}" id="partHeight" />
+						</div>
+						<div class="col-5">
+							<span id="partHeightError"></span>
+						</div>
+					</div>
+
+					<!-- Sixth Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Base Cost</label>
+						</div>
+						<div class="col-4">
+							<input type="text" class="form-control" th:field="*{baseCost}" id="baseCost" />
+						</div>
+						<div class="col-5">
+							<span id="baseCostError"></span>
+						</div>
+					</div>
+
+					<!-- Seventh Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Base Currency</label>
+						</div>
+						<div class="col-4">
+							<select th:field="*{baseCurrency}" class="form-control" id="baseCurrency">
+								<option value="">--SELECT--</option>
+								<option value="INR">INR</option>
+								<option value="USD">USD</option>
+								<option value="AUSD">AUSD</option>
+								<option value="ERU">ERU</option>
+							</select>
+						</div>
+						<div class="col-5">
+							<span id="baseCurrencyError"></span>
+						</div>
+					</div>
+
+					<!-- Eight Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Description</label>
+						</div>
+						<div class="col-4">
+							<textarea id="desc" th:field="*{desc}" class="form-control"></textarea>
+						</div>
+						<div class="col-5">
+							<span id="descError"></span>
+						</div>
+					</div>
+
+					<input type="submit" value="Update" class="btn btn-success btn-lg" />
+				</form>
+			</div>
+
+			<div class="card-footer alert alert-warning" th:if="${msg!=null}">
+				<span th:text="${msg}"></span>
+			</div>
+			<!--Card Footer End -->
+
+		</div>
+	</div>     
+</body>
+</html>

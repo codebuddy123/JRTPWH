@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header  bg-primary text-center text-white">
+				<h3>WELCOME TO PURCHASE ORDER DATA PAGE</h3>
+			</div>
+			<div class="card-body">
+				<table class="table table-hover">
+					<tr class="text-white bg-success">
+						<th>ID</th>
+						<th>ORDER CODE</th>
+						<th>SHIPMENT</th>
+						<th>VENDOR</th>
+						<th>REFERENCE NUMBER</th>
+						<th>QUALITY CHECK</th>
+						<th>DEFAULT STATUS</th>
+						<th>DESCRIPTION</th>
+						<th>OPERATIONS</th>
+
+					</tr>
+					<!-- for(PurchaseOrder ob:list) {} -->
+					<tr th:each="ob:${list}">
+						<td th:text="${ob.id}"></td>
+						<td th:text="${ob.orderCode}"></td>
+						<td th:text="${ob.shipmentType.shipmentCode}"></td>
+						<td th:text="${ob.vendor.userCode}"></td>
+						<td th:text="${ob.refNo}"></td>
+						<td th:text="${ob.qCheck}"></td>
+						<td th:text="${ob.defStatus}"></td>
+						<td th:text="${ob.desc}"></td>
+						<td> <a th:href="@{/po/parts(poId=${ob.id})}" class="btn btn-info">PARTS</a>
+						</td>
+					</tr>
+				</table>
+
+			</div>
+			<!-- Card Body End -->
+
+			<div class="card-footer alert alert-success" th:if="${msg!=null}">
+				<span th:text="${msg}"></span>
+			</div>
+			<!-- Card Footer -->
+		</div>
+		<!-- Card End -->
+	</div>
+	<!-- Container End -->
+</body>
+</html>

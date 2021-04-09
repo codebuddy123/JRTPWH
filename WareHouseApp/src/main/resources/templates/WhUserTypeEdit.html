@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>WELCOME TO WHUSER REGISTRATION</h3>
+<form th:action=@{/wh/update} method="POST" th:object="${whuserType}">
+<pre>
+User ID:  <input type="text" th:field="*{id}" readOnly>
+User Type:<input type="radio" th:field="*{userType}" value="Vendor">Vendor
+	  <input type="radio" th:field="*{userType}" value="Customer">Customer
+
+User Code: <input type="text" th:field="*{userCode}" id="userCode"/>
+
+User For:  <input type="text" th:field="*{userFor}" id="userFor"/>
+
+User Email: <input type="text" th:field="*{userEmail}" id="userEmail"/>
+
+User Contact: <textarea th:field="*{userContact}" id="userContact"></textarea>
+
+User Id Type: <select th:field="*{userIdType}" id ="userIdType">
+				<option value="SELECT">--SELECT--</option>
+				<option value="PAN CARD">PAN CARD</option>
+				<option value="AADHAR">AADHAR</option>
+				<option value="VOTER ID">VOTER ID</option>
+				<option value="OTHER">OTHER</option>
+              </select>
+
+*IF Other : <input type="text" th:field="*{userIfOther}" id="userIfOther"/>
+
+ID Number: <input type="text" th:field="*{userIdNumber}" id="userIdNumber"/>
+
+<input type="submit" value="Update User"/>
+
+</pre>
+</form>
+</body>
+</html>

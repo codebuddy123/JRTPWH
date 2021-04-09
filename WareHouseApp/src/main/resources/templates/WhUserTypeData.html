@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>WELCOME TO WHUSER TYPE DATA PAGE</h3>
+<a th:href="@{/wh/excel}">EXPORT ALL(EXCEL)</a>
+<a th:href="@{/wh/pdf}">EXPORT ALL(PDF)</a>
+<table border='1'>
+<tr>
+	<th>USER ID</th>
+	<th>USER TYPE</th>
+	<th>USER CODE</th>
+	<th>USER FOR</th>
+	<th>USER EMAIL</th>
+	<th>USER CONTACT</th>
+	<th>ID TYPE</th>
+	<th>IFOTHER</th>
+	<th>IDNUM</th>
+	<th>OPERATIONS</th>
+</tr>
+<tr th:each="ob:${list}">
+	<td th:text="${ob.id}"></td>
+	<td th:text="${ob.userType}"></td>
+	<td th:text="${ob.userCode}"></td>
+	<td th:text="${ob.userFor}"></td>
+	<td th:text="${ob.userEmail}"></td>
+	<td th:text="${ob.userContact}"></td>
+	<td th:text="${ob.userIdType}"></td>
+	<td th:text="${ob.userIfOther}"></td>
+	<td th:text="${ob.userIdNumber}"></td>
+	<td><a th:href="@{/wh/delete(id=${ob.id})}"
+							>DELETE</a> | 
+		<a th:href="@{/wh/edit(id=${ob.id})}"
+							>EDIT</a>
+		<a th:href="@{/wh/excel(id=${ob.id})}">EXCEL</a>
+		<a th:href="@{/wh/pdf(id=${ob.id})}">PDF</a>
+		</td>
+</tr>
+</table>
+<span th:text="${msg}"></span>
+</body>
+</html>

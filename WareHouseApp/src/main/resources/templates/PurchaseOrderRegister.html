@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header bg-danger text-white text-center">
+				WELCOME TO PURCHASE ORDER REGISTER PAGE!!</div>
+			<!-- Card Header End -->
+
+			<div class="card-body">
+				<form th:action="@{/po/save}" method="POST">
+
+					<!-- First Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Order Code</label>
+						</div>
+						<div class="col-4">
+							<input type="text" name="orderCode" id="orderCode"
+								class="form-control" />
+						</div>
+						<div class="col-5">
+							<span id="orderCodeError"></span>
+						</div>
+					</div>
+
+
+
+					<!-- Second Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Shipment Code</label>
+						</div>
+						<div class="col-4">
+							<select name="shipmentType.id" class="form-control"
+								id="shipmentid">
+
+								<option value="">--SELECT-</option>
+								<option th:each="ob:${shipments}" th:text="${ob.value}"
+									th:value="${ob.key}"></option>
+							</select>
+						</div>
+						<div class="col-5">
+							<span id="shipmentError"></span>
+						</div>
+					</div>
+
+
+					<!-- Third Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Vendor</label>
+						</div>
+						<div class="col-4">
+							<select name="vendor.id" class="form-control" id="vendorid">
+
+								<option value="">--SELECT-</option>
+								<option th:each="ob:${whusers}" th:text="${ob.value}"
+									th:value="${ob.key}"></option>
+							</select>
+						</div>
+						<div class="col-5">
+							<span id="vendorError"></span>
+						</div>
+					</div>
+
+
+
+					<!-- Fourth Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Reference Number</label>
+						</div>
+						<div class="col-4">
+							<input type="text" name="refNo" id="refNo" class="form-control" />
+						</div>
+						<div class="col-5">
+							<span id="refNoError"></span>
+						</div>
+					</div>
+
+					<!-- Fifth Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Quality Check</label>
+						</div>
+						<div class="col-4">
+							<input type="radio" name="qCheck" value="Required">
+							Required <input type="radio" name="qCheck" value="Not Required">
+							Not Required
+						</div>
+						<div class="col-5">
+							<span id="qCheckError"></span>
+						</div>
+					</div>
+
+					<!-- Sixth Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Default Status</label>
+						</div>
+						<div class="col-4">
+							<input type="text" class="form-control" name="defStatus"
+								id="defStatus" readOnly />
+						</div>
+						<div class="col-5">
+							<span id="defStatusError"></span>
+						</div>
+					</div>
+					<!-- Seventh Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Description</label>
+						</div>
+						<div class="col-4">
+							<textarea class="form-control" name="desc" id="desc"></textarea>
+						</div>
+						<div class="col-5">
+							<span id="descError"></span>
+						</div>
+					</div>
+					<input type="submit" value="Create Order" class="btn btn-primary" />
+				</form>
+
+
+			</div>
+			<!-- CardBody End -->
+
+			<div class="card-footer alert alert-info" th:if="${msg!=null}">
+				<span th:text="${msg}"></span>
+
+			</div>
+			<!--Card Footer End -->
+		</div>
+		<!-- Card End -->
+	</div>
+	<!-- Container End -->
+
+	<script>
+		$(document).ready(function() {
+
+			$("#defStatus").val("OPEN")
+		});
+	</script>
+</body>
+</html>

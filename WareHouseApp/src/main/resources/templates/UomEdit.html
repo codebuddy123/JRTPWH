@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header bg-info text-white text-center">
+				<h3>WELCOME TO UOM REGISTER PAGE!</h3>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/uom/update}" method="POST" th:object="${uom}">
+				   
+				   	<!-- First Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Uom ID</label>
+						</div>
+						<div class="col-4">	
+							<input type="text" th:field="*{id}" class="form-control" readOnly id="id"/>	
+						</div>
+						<div class="col-5">
+							<span id="uomTypeError"></span>
+						</div>
+					</div>
+
+					<!-- Second Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Uom Type</label>
+						</div>
+						<div class="col-4">
+							<select th:field="*{uomType}">
+								<option value="--">--SELECT--</option>
+								<option value="PACKING">PACKING</option>
+								<option value="NO PACKING">NO PACKING</option>
+								<option value="-NA-">-NA-</option>
+							</select>
+						</div>
+						<div class="col-5">
+							<span id="uomTypeError"></span>
+						</div>
+					</div>
+
+					<!-- Third Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Uom Model</label>
+						</div>
+						<div class="col-4">
+							<input type="text" th:field="*{uomModel}" id="uomModel"
+								class="form-control" />
+						</div>
+						<div class="col-5">
+							<span id="uomModelError"></span>
+						</div>
+					</div>
+
+					<!-- Fourth Row -->
+					<div class="row">
+						<div class="col-3">
+							<label>Uom Description</label>
+						</div>
+						<div class="col-4">
+							<textarea th:field="*{uomDescription}" id="uomDescription"
+								class="form-control"></textarea>
+						</div>
+						<div class="col-5">
+							<span id="uomDescriptionError"></span>
+						</div>
+					</div>
+
+					<input type="submit" value="Update UOM"
+						class="btn btn-primary btn-lg" />
+				</form>
+			</div>
+
+			<div class="card-footer alert alert-warning" th:if="${msg!=null}">
+				<span th:text="${msg}"></span>
+			</div>
+			<!--Card Footer End -->
+
+
+		</div>
+	</div>
+</body>
+</html>

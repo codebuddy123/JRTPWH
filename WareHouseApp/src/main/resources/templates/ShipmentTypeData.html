@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header  bg-primary text-center text-white">
+				<h3>WELCOME TO SHIPMENT TYPE DATA PAGE</h3>
+			</div>
+			<div class="card-body">
+				<table class="table table-hover">
+					<tr class="text-white bg-success">
+						<th>ID</th>
+						<th>MODE</th>
+						<th>CODE</th>
+						<th>ENABLE</th>
+						<th>GRADE</th>
+						<th>DESCRIPTION</th>
+						<th>OPERATION</th>
+					</tr>
+					<!-- for(ShipmentType ob:list) {} -->
+					<tr th:each="ob:${page.content}">
+						<td th:text="${ob.id}"></td>
+						<td th:text="${ob.shipmentMode}"></td>
+						<td th:text="${ob.shipmentCode}"></td>
+						<td th:text="${ob.enableShipment}"></td>
+						<td th:text="${ob.shipmentGrade}"></td>
+						<td th:text="${ob.shipmentDescription}"></td>
+						<td><a th:href="@{/st/delete(id=${ob.id})}"
+							class="btn btn-danger" title="remove">DELETE</a> | <a
+							th:href="@{/st/edit(id=${ob.id})}"  class="btn btn-info">EDIT</a></td>
+					</tr>
+				</table>
+
+			</div>
+			<!-- Card Body End -->
+
+			<div class="card-footer alert alert-success" th:if="${msg!=null}">
+				<span th:text="${msg}"></span>
+			</div>
+			<!-- Card Footer -->
+		</div>
+		<!-- Card End -->
+		
+
+		<!-- FIRST BUTTON CODE -->
+		<nav aria-label="Page navigation">
+			<ul class="pagination justify-content-center">
+				<li class="page-item"><a th:if="${!page.isFirst()}"
+					class="page-link" th:href="@{/st/all(page=0)}"> First</a></li>
+
+
+				<!-- PREVIOUS BUTTON CODE -->
+				<li class="page-item"><a th:if="${page.hasPrevious()}"
+					class="page-link" th:href="@{/st/all(page=${page.number-1})}">
+						Previous</a></li>
+
+				<!-- NUMBERS BUTTONS CODE -->
+				<th:block th:each="i:${#numbers.sequence(0,page.totalPages-1)}">
+					<th:block th:if="${i==page.number}">
+						<li class="page-item active"><a class="page-link"
+							th:href="@{/st/all(page=${i})}">[[${i+1}]]</a>
+					</th:block>
+
+					<th:block th:if="${i!=page.number}">
+						<li class="page-item"><a class="page-link"
+							th:href="@{/st/all(page=${i})}">[[${i+1}]]</a>
+					</th:block>
+				</th:block>
+
+
+				<!-- NEXT BUTTON CODE -->
+
+				<li class="page-item"><a th:if="${page.hasNext()}"
+					class="page-link" th:href="@{/st/all(page=${page.number+1})}">
+						Next</a></li>
+
+
+				<!-- LAST BUTTON CODE -->
+			  <li class="page-item"><a th:if="${!page.isLast()}"
+					class="page-link" th:href="@{/st/all(page=${page.totalPages-1})}">
+						Last</a></li>
+			  
+			</ul>
+		</nav>
+
+	</div>
+	<!-- Container End -->
+<script>
+	$(document).ready(function(){
+		$('[title="delete"]').click(function(){
+			return confirm("Do you Want to Delete ShipmentType?");
+		});
+	});
+</script> 
+</body>
+</html>
