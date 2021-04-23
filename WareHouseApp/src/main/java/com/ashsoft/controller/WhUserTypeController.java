@@ -18,7 +18,6 @@ import com.ashsoft.model.WhUserType;
 import com.ashsoft.service.IWhUserTypeService;
 import com.ashsoft.view.WhUserTypeExcelView;
 import com.ashsoft.view.WhUserTypePdfView;
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
 @Controller
 @RequestMapping("/wh")

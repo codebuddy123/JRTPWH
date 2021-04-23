@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ashsoft.model.PurchaseOrder;
 import com.ashsoft.consts.POStatus;
@@ -20,6 +21,7 @@ import com.ashsoft.service.IPartService;
 import com.ashsoft.service.IPurchaseOrderService;
 import com.ashsoft.service.IShipmentTypeService;
 import com.ashsoft.service.IWhUserTypeService;
+import com.ashsoft.view.VendorInvoicePdfView;
 
 @Controller
 @RequestMapping("/po")
@@ -151,6 +153,7 @@ public class PurchaseOrderController {
 	 */
 	@GetMapping("/removeDtl")
 	public String removePurchaseDtl(@RequestParam("poId") Integer orderId, @RequestParam("dtlId") Integer dtlId) {
+		
 		service.deletePurchaseDtlByOrderId(dtlId);
 
 		// if (count=0 and current status is not open) then update status = open
@@ -167,26 +170,50 @@ public class PurchaseOrderController {
 	public String placeOrderById(@RequestParam("poId") Integer orderId) {
 
 		service.updatePoStatusByOrderId(POStatus.ORDERED.getValue(), orderId);
+		
 		return "redirect:parts?poId=" + orderId;
 	}
-	
-	//Quantity increase and decrease buttons methods
+
+	// Quantity increase and decrease buttons methods
 	@GetMapping("/increaseByOne")
-	public String increaseByOne(
-			@RequestParam("poId")Integer orderId,
-			@RequestParam("dtlId")Integer dtlId
-			) 
-	{
+	public String increaseByOne(@RequestParam("poId") Integer orderId, @RequestParam("dtlId") Integer dtlId) {
+		
 		service.updatePurchaseDtlQtyByDtlId(dtlId, 1);
-		return "redirect:parts?poId="+orderId;
+		
+		return "redirect:parts?poId=" + orderId;
 	}
+
 	@GetMapping("/reduceByOne")
-	public String reduceByOne(
-			@RequestParam("poId")Integer orderId,
-			@RequestParam("dtlId")Integer dtlId
-			) 
-	{
+	public String reduceByOne(@RequestParam("poId") Integer orderId, @RequestParam("dtlId") Integer dtlId) {
+		
 		service.updatePurchaseDtlQtyByDtlId(dtlId, -1);
-		return "redirect:parts?poId="+orderId;
+		
+		return "redirect:parts?poId=" + orderId;
+	}
+
+	// Updating the status to INVOICED After clicking Generate Invoice
+
+	@GetMapping("/genInv")
+	public String generateInvoice(@RequestParam("poId") Integer orderId) {
+		
+		if (POStatus.ORDERED.getValue().equals(service.getStatusByOrderId(orderId))) {
+			
+			service.updatePoStatusByOrderId(POStatus.INVOICED.getValue(), orderId);
+		}
+		return "redirect:all";
+	}
+
+	// Print PDF of Vendor Invoice
+
+	@GetMapping("printInv")
+	public ModelAndView printInvoice(@RequestParam("poId") Integer orderId) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setView(new VendorInvoicePdfView());
+		mv.addObject("po", service.getOnePurchaseOrder(orderId));
+		mv.addObject("poDtls", service.getPurchaseDtlByOrderId(orderId));
+		
+		return mv;
 	}
 }

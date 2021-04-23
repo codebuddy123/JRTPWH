@@ -1,6 +1,5 @@
 package com.ashsoft.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ashsoft.model.Part;
 import com.ashsoft.repo.PartRepo;
-import com.ashsoft.view.AppUtil;
+import com.ashsoft.util.AppUtil;
 
 @Service
 public class PartServiceImpl implements IPartService {

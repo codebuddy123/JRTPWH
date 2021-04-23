@@ -12,7 +12,6 @@ import com.ashsoft.model.WhUserType;
 import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 public class WhUserTypePdfView extends AbstractPdfView {

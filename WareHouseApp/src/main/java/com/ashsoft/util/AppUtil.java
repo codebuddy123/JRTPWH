@@ -1,4 +1,4 @@
-package com.ashsoft.view;
+package com.ashsoft.util;
 
 import java.util.HashMap;
 import java.util.List;

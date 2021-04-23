@@ -42,7 +42,7 @@ public class OrderMethodServiceImpl implements IOrderMethodService {
 	@Override
 	public boolean orderMethodIfExist(Integer id) {
 		boolean b = repo.existsById(id);
-		return true;
+		return b;
 	}
 
 	@Override
